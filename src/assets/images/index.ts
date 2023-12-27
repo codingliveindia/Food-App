@@ -1,0 +1,5 @@
+export const logo = require('./logo.png')
+export const onboad1 = require('./onboad1.png')
+export const onboad2 = require('./onboad2.png')
+export const onboad3 = require('./onboad3.png')
+export const onboad4 = require('./onboad4.png')
