@@ -108,8 +108,8 @@ export default function Onboading({ navigation }: Props) {
                     </Text>
                 </View>
                 <View style={{}}>
-                    <ButtonWithBg title='Next' bg={true} onPress={Next} />
-                    <ButtonWithBg title='Skip' onPress={Skip} />
+                    <ButtonWithBg title='Next' onPress={Next} />
+                    <ButtonWithBg title='Skip' bg={COLORS.white} txtBg={COLORS.black} onPress={Skip} />
                 </View>
 
 

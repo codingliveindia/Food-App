@@ -5,22 +5,23 @@ import { COLORS } from '../../utils/color'
 
 interface Props {
     onPress: Function,
-    bg?: boolean,
+    bg?: String,
+    txtBg?: String
     title: string
 }
 
-export default function ButtonWithBg({ onPress, bg = false, title }: Props) {
+export default function ButtonWithBg({ onPress, bg = COLORS.black, txtBg = COLORS.white, title }: Props) {
     return (
         <Pressable onPress={() => onPress()}>
             <View style={{
                 width: Size.RPWidth(90),
-                backgroundColor: bg ? COLORS.black : COLORS.white,
+                backgroundColor: bg,
                 padding: Size.RPHeight(1.5),
                 borderRadius: 5,
                 alignItems: 'center'
             }}>
                 <Text style={{
-                    color: bg ? COLORS.white : COLORS.black, fontWeight: 'bold',
+                    color: txtBg, fontWeight: 'bold',
                     fontSize: Size.RPFont(2)
                 }}>{title}</Text>
             </View>

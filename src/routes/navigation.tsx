@@ -6,7 +6,7 @@ import Home from '../screens/home';
 import Splash from '../screens/splash';
 import Tabs from './tab';
 import Onboading from '../screens/onboarding/onboading';
-import PhoneLogin from '../screens/auth/Phonelogin';
+import PhoneLogin from '../screens/auth/phoneLogin';
 
 const Stack = createNativeStackNavigator();
 
