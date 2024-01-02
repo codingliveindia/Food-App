@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, Pressable, TextInput } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { ButtonWithBg, Wrapper } from '../../components'
 import { login } from '../../assets/images'
 import { Size } from '../../constant/size'
@@ -9,6 +9,40 @@ import ReactNativeModal from 'react-native-modal'
 import CountryCode from '../../components/modal/countryCode'
 
 export default function PhoneLogin() {
+    const [isVisible, setisVisible] = React.useState(false)
+    const [countryData, setcountryData] = React.useState<any>(null)
+    const [phoneNumber, setphoneNumber] = useState<any>(null)
+    const [phoneNumberErr, setphoneNumberErr] = useState("phone number is required")
+
+
+    const closeModal = (data?: any) => {
+        if (data) {
+            setcountryData(data)
+        }
+        setisVisible(false)
+    }
+
+    const checkValiation = (data: any) => {
+        if (data) {
+            if (data.length >= 7) {
+                setphoneNumberErr("")
+                setphoneNumber(data)
+            } else {
+                setphoneNumberErr("phone number is invalid")
+            }
+
+        }
+        else {
+            setphoneNumberErr("phone number is required")
+        }
+    }
+
+
+
+    const submit = () => {
+        console.log("passed")
+    }
+
     return (
         <Wrapper>
             <View style={styles.conatiner}>
@@ -24,15 +58,18 @@ export default function PhoneLogin() {
 
                         <View style={{ flexDirection: 'row', marginVertical: Size.RPFont(1), alignItems: 'center' }}>
                             <Pressable >
-                                <View style={{
-                                    width: Size.RPWidth(20), borderWidth: 1,
-                                    padding: Size.RPFont(1.5), borderRadius: 5,
-                                    borderColor: COLORS.lightGrey, flexDirection: 'row',
-                                    alignItems: 'center'
-                                }}>
-                                    <Text style={{ fontSize: Size.RPFont(2) }}>🇮🇳</Text>
+                                <Pressable
+                                    onPress={() => setisVisible(true)}
+                                    style={{
+                                        width: Size.RPWidth(20), borderWidth: 1,
+                                        padding: Size.RPFont(1.5), borderRadius: 5,
+                                        borderColor: COLORS.lightGrey, flexDirection: 'row',
+                                        alignItems: 'center',
+
+                                    }}>
+                                    <Text style={{ fontSize: Size.RPFont(2) }}>{countryData ? countryData?.Unicode : "🇮🇳"}</Text>
                                     <Ant name='down' color={COLORS.black} size={Size.RPFont(2)} style={{ marginLeft: 5 }} />
-                                </View>
+                                </Pressable>
                             </Pressable>
                             <View style={{
                                 flexDirection: 'row', alignItems: 'center',
@@ -40,8 +77,11 @@ export default function PhoneLogin() {
                                 borderWidth: 1, padding: Size.RPFont(1.5),
                                 borderColor: COLORS.lightGrey, borderRadius: 5
                             }}>
-                                <Text>+91</Text>
-                                <TextInput placeholder='00000 00000' />
+                                <Text>+{countryData ? countryData?.Dial : "91"}</Text>
+                                <TextInput
+                                    onChangeText={(e) => checkValiation(e)}
+                                    keyboardType='number-pad' maxLength={13}
+                                    style={{ marginLeft: Size.RPFont(1) }} placeholder='00000 00000' />
                             </View>
                         </View>
 
@@ -51,7 +91,11 @@ export default function PhoneLogin() {
                 </View>
 
                 <View style={{ alignItems: 'center' }}>
-                    <ButtonWithBg title='Continue' bg={COLORS.darkGrey} txtBg={COLORS.white} onPress={() => { }} />
+                    <ButtonWithBg title='Continue'
+                        bg={phoneNumberErr == "" ? COLORS.black : COLORS.darkGrey}
+                        txtBg={phoneNumberErr == "" ? COLORS.white : COLORS.white}
+                        disabled={phoneNumberErr == "" ? false : true}
+                        onPress={submit} />
                     <View style={{ flexDirection: 'row', marginVertical: Size.RPFont(2) }}>
                         <Text style={styles.note}>By clicking, I accept the </Text>
                         <Text style={[styles.note, { color: COLORS.black }]}>Terms & Condition</Text>
@@ -61,8 +105,11 @@ export default function PhoneLogin() {
                 </View>
 
             </View>
-            <ReactNativeModal isVisible={true} style={{ margin: 0, justifyContent: 'flex-end' }}>
-                <CountryCode />
+            <ReactNativeModal onBackButtonPress={() => closeModal()}
+                isVisible={isVisible}
+                onBackdropPress={() => closeModal()}
+                style={{ margin: 0, justifyContent: 'flex-end' }}>
+                <CountryCode closeModal={closeModal} />
 
             </ReactNativeModal>
 

@@ -5,9 +5,12 @@ import { COLORS } from '../../utils/color'
 import SearchInput from '../searchInput/searchInput'
 import { countryCode } from '../../json/country'
 
+interface Props {
+    closeModal: Function
+}
 
 
-export default function CountryCode() {
+export default function CountryCode({ closeModal }: Props) {
 
     const [sortCoutryCode, setsortCoutryCode] = useState(countryCode)
     const [search, setsearch] = useState("")
@@ -38,7 +41,9 @@ export default function CountryCode() {
     const renderCountryData = ({ item }: any) => {
         return (
             <>
-                <Pressable style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Pressable
+                    onPress={() => closeModal(item)}
+                    style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ fontSize: Size.RPFont(5) }}>{item.Unicode}</Text>
                     <Text style={{ marginLeft: Size.RPFont(1) }}>{item.Name}</Text>
                 </Pressable>
@@ -59,7 +64,7 @@ export default function CountryCode() {
                 </View>
                 <FlatList
                     data={sortCoutryCode}
-                    keyExtractor={(item: any) => item.name}
+                    keyExtractor={(item: any) => item.Name}
                     renderItem={renderCountryData}
                 />
             </View>

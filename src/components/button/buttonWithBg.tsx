@@ -8,11 +8,14 @@ interface Props {
     bg?: String,
     txtBg?: String
     title: string
+    disabled?: boolean
 }
 
-export default function ButtonWithBg({ onPress, bg = COLORS.black, txtBg = COLORS.white, title }: Props) {
+export default function ButtonWithBg({ onPress, bg = COLORS.black, txtBg = COLORS.white, title, disabled = false }: Props) {
     return (
-        <Pressable onPress={() => onPress()}>
+        <Pressable
+            disabled={disabled}
+            onPress={() => onPress()}>
             <View style={{
                 width: Size.RPWidth(90),
                 backgroundColor: bg,
