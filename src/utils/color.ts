@@ -5,7 +5,8 @@ const COLORS = {
     black: "#000000",
     lightGrey: "#d3d3d3",
     darkGrey: "#A9A9A9",
-    inputColor: "#F2F2F3"
+    inputColor: "#F2F2F3",
+    green: "green"
 }
 
 export { COLORS }

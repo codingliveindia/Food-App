@@ -7,8 +7,13 @@ import { COLORS } from '../../utils/color'
 import Ant from "react-native-vector-icons/AntDesign";
 import ReactNativeModal from 'react-native-modal'
 import CountryCode from '../../components/modal/countryCode'
+import { NavigationProp } from '@react-navigation/native'
 
-export default function PhoneLogin() {
+interface Props {
+    navigation: NavigationProp<any, any>
+}
+
+export default function PhoneLogin({ navigation }: Props) {
     const [isVisible, setisVisible] = React.useState(false)
     const [countryData, setcountryData] = React.useState<any>(null)
     const [phoneNumber, setphoneNumber] = useState<any>(null)
@@ -41,6 +46,11 @@ export default function PhoneLogin() {
 
     const submit = () => {
         console.log("passed")
+        navigation.navigate("Otp", {
+            phone_number: phoneNumber,
+            country_code: countryData ? countryData?.Dial : "91"
+        })
+
     }
 
     return (
