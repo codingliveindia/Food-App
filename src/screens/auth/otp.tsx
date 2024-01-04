@@ -6,6 +6,7 @@ import { COLORS } from '../../utils/color';
 import { Size } from '../../constant/size';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import OTPInputView from '@twotalltotems/react-native-otp-input'
+import OTPTimer from '../../components/otp/timer';
 
 interface Props {
     navigation: NavigationProp<any, any>
@@ -15,6 +16,24 @@ interface Props {
 export default function Otp({ navigation, route }: Props) {
     const [OtpErr, setOtpErr] = useState(false)
     const [otpcode, setotpcode] = useState<any>()
+    const [resend, setresend] = useState(false)
+    const [resendEnable, setresendEnable] = useState(false)
+
+
+    const getTimer = () => {
+        console.log("timer completed")
+        setresendEnable(true)
+    }
+
+    const storeTimer = (time: number) => { }
+
+
+    const resentOtp = () => {
+        if (resendEnable) {
+            setresend(!resend)
+            setresendEnable(false)
+        }
+    }
 
     return (
         <Wrapper>
@@ -79,11 +98,20 @@ export default function Otp({ navigation, route }: Props) {
                             <Text>
                                 Didn't recive OTP?
                             </Text>
-                            <Text style={{ color: COLORS.green }}>
-                                {" "}Resend
-                            </Text>
+                            <Pressable
+                                disabled={!resendEnable}
+                                onPress={resentOtp}>
+                                <Text style={{ color: resendEnable ? COLORS.green : COLORS.darkGrey }}>
+                                    {" "}Resend
+                                </Text>
+                            </Pressable>
                         </View>
-                        <Text>00.28</Text>
+                        <OTPTimer
+                            getTime={getTimer}
+                            initialTime={10}
+                            restart={resend}
+                            storeTimer={storeTimer}
+                        />
 
                     </View>
 

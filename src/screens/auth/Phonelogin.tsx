@@ -67,24 +67,25 @@ export default function PhoneLogin({ navigation }: Props) {
                         <Text style={styles.txt}>Enter phone number</Text>
 
                         <View style={{ flexDirection: 'row', marginVertical: Size.RPFont(1), alignItems: 'center' }}>
-                            <Pressable >
-                                <Pressable
-                                    onPress={() => setisVisible(true)}
-                                    style={{
-                                        width: Size.RPWidth(20), borderWidth: 1,
-                                        padding: Size.RPFont(1.5), borderRadius: 5,
-                                        borderColor: COLORS.lightGrey, flexDirection: 'row',
-                                        alignItems: 'center',
 
-                                    }}>
-                                    <Text style={{ fontSize: Size.RPFont(2) }}>{countryData ? countryData?.Unicode : "🇮🇳"}</Text>
-                                    <Ant name='down' color={COLORS.black} size={Size.RPFont(2)} style={{ marginLeft: 5 }} />
-                                </Pressable>
+                            <Pressable
+                                onPress={() => setisVisible(true)}
+                                style={{
+                                    width: Size.RPWidth(20), borderWidth: 1,
+                                    padding: Size.RPFont(1.5), borderRadius: 5,
+                                    borderColor: COLORS.lightGrey, flexDirection: 'row',
+                                    alignItems: 'center',
+
+                                }}>
+                                <Text style={{ fontSize: Size.RPFont(2) }}>{countryData ? countryData?.Unicode : "🇮🇳"}</Text>
+                                <Ant name='down' color={COLORS.black} size={Size.RPFont(2)} style={{ marginLeft: 5 }} />
+
                             </Pressable>
                             <View style={{
                                 flexDirection: 'row', alignItems: 'center',
                                 marginLeft: Size.RPFont(1), width: Size.RPWidth(70),
                                 borderWidth: 1, padding: Size.RPFont(1.5),
+
                                 borderColor: COLORS.lightGrey, borderRadius: 5
                             }}>
                                 <Text>+{countryData ? countryData?.Dial : "91"}</Text>
