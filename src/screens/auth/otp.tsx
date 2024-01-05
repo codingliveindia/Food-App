@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native'
+import { View, Text, StyleSheet, Pressable, Platform } from 'react-native'
 import React, { useState } from 'react'
 import { ButtonWithBg, Wrapper } from '../../components'
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -134,7 +134,8 @@ export default function Otp({ navigation, route }: Props) {
 const styles = StyleSheet.create({
     conatiner: {
         flex: 1,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginVertical: Platform.OS == "ios" ? 0 : Size.RPFont(2)
     },
     underlineStyleBase: {
         width: 50,

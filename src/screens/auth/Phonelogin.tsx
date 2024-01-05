@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, Pressable, TextInput } from 'react-native'
+import { View, Text, Image, StyleSheet, Pressable, TextInput, Platform } from 'react-native'
 import React, { useState } from 'react'
 import { ButtonWithBg, Wrapper } from '../../components'
 import { login } from '../../assets/images'
@@ -66,15 +66,22 @@ export default function PhoneLogin({ navigation }: Props) {
                         <Text style={styles.subheading}>login or singup to use app</Text>
                         <Text style={styles.txt}>Enter phone number</Text>
 
-                        <View style={{ flexDirection: 'row', marginVertical: Size.RPFont(1), alignItems: 'center' }}>
+                        <View style={{
+                            flexDirection: 'row',
+                            marginVertical: Size.RPFont(1),
+                            // height: Size.RPHeight(5),
+                            alignItems: 'center'
+                        }}>
 
                             <Pressable
                                 onPress={() => setisVisible(true)}
                                 style={{
                                     width: Size.RPWidth(20), borderWidth: 1,
-                                    padding: Size.RPFont(1.5), borderRadius: 5,
+                                    borderRadius: 5,
                                     borderColor: COLORS.lightGrey, flexDirection: 'row',
                                     alignItems: 'center',
+                                    justifyContent: 'center',
+                                    padding: Size.RPFont(1.7),
 
                                 }}>
                                 <Text style={{ fontSize: Size.RPFont(2) }}>{countryData ? countryData?.Unicode : "🇮🇳"}</Text>
@@ -84,15 +91,20 @@ export default function PhoneLogin({ navigation }: Props) {
                             <View style={{
                                 flexDirection: 'row', alignItems: 'center',
                                 marginLeft: Size.RPFont(1), width: Size.RPWidth(70),
-                                borderWidth: 1, padding: Size.RPFont(1.5),
-
+                                borderWidth: 1,
+                                padding: Size.RPFont(1.5),
                                 borderColor: COLORS.lightGrey, borderRadius: 5
                             }}>
-                                <Text>+{countryData ? countryData?.Dial : "91"}</Text>
+                                <Text style={{ fontSize: Size.RPFont(2) }}>+{countryData ? countryData?.Dial : "91"}</Text>
                                 <TextInput
+
                                     onChangeText={(e) => checkValiation(e)}
                                     keyboardType='number-pad' maxLength={13}
-                                    style={{ marginLeft: Size.RPFont(1) }} placeholder='00000 00000' />
+                                    style={{
+                                        marginLeft: Size.RPFont(0.5),
+                                        padding: 0,
+                                        fontSize: Size.RPFont(2)
+                                    }} placeholder='00000 00000' />
                             </View>
                         </View>
 
@@ -129,7 +141,11 @@ export default function PhoneLogin({ navigation }: Props) {
 }
 
 const styles = StyleSheet.create({
-    conatiner: { flex: 1, justifyContent: 'space-between' },
+    conatiner: {
+        flex: 1,
+        justifyContent: 'space-between',
+        marginVertical: Platform.OS == "ios" ? 0 : Size.RPFont(2)
+    },
     img: { width: Size.RPWidth(80), height: Size.RPHeight(30) },
     heading: { fontWeight: '600', fontSize: Size.small },
     subheading: { marginTop: Size.RPFont(0.5), color: COLORS.darkGrey },
